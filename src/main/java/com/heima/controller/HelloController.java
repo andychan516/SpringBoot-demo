@@ -1,5 +1,7 @@
-package com.leyou.controller;
+package com.heima.controller;
 
+import com.heima.pojo.User;
+import com.heima.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,10 +14,13 @@ public class HelloController {
   @Autowired
   private DataSource dataSource;
 
+  @Autowired
+  private UserService userService;
 
-  @GetMapping("hello")
-  public String hello(){
-    System.out.println(dataSource);
-    return "hello, spring boot!";
+
+  @GetMapping("/hello")
+  public User hello() {
+    User user = this.userService.queryById(16L);
+    return user;
   }
 }
